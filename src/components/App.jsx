@@ -1,15 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AppRouter from './Router';
 import { authService } from '../fbInstance';
 
 import Footer from './Footer';
 
 export default () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(authService.currentUser);
-  console.log(authService.currentUser, 'user');
+  const [init, setInit] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    authService.onAuthStateChanged(user => {
+      console.log(user);
+      if (user) {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+      setInit(true);
+    });
+  }, []);
   return (
     <>
-      <AppRouter isLoggedIn={isLoggedIn} />
+      {init ? <AppRouter isLoggedIn={isLoggedIn} /> : 'Initializing....'}
       <Footer />
     </>
   );

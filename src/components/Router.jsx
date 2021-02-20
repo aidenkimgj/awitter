@@ -4,8 +4,7 @@ import Home from '../routes/Home';
 import Auth from '../routes/Auth';
 import { Container } from 'reactstrap';
 
-const AppRouter = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+const AppRouter = ({ isLoggedIn }) => {
   return (
     <Container id="main-body">
       <Router>
