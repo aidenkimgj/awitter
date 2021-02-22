@@ -3,7 +3,6 @@ import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from '../routes/Home';
 import Auth from '../routes/Auth';
 import { Container } from 'reactstrap';
-import BestLocations from '../routes/BestLocations';
 
 const AppRouter = ({ isLoggedIn }) => {
   return (
@@ -15,7 +14,6 @@ const AppRouter = ({ isLoggedIn }) => {
           ) : (
             <Route path="/" exact component={Auth} />
           )}
-          <Route path="/bestlocations" exact component={BestLocations} />
         </Switch>
       </Router>
     </Container>
