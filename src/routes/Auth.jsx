@@ -12,7 +12,7 @@ import {
   Label,
   Button,
 } from 'reactstrap';
-import { authService } from '../fbInstance';
+import firebaseInstance, { authService } from '../fbInstance';
 
 const Auth = () => {
   const [email, setEmail] = useState('');
@@ -52,6 +52,19 @@ const Auth = () => {
   };
 
   const toggleHandler = () => setNewAccount(!newAccount);
+  const onSocialClick = async e => {
+    const {
+      target: { name },
+    } = e;
+    let provider;
+    if (name === 'google') {
+      provider = new firebaseInstance.auth.GoogleAuthProvider();
+    } else if (name === 'github') {
+      provider = new firebaseInstance.auth.GithubAuthProvider();
+    }
+    const data = await authService.signInWithPopup(provider);
+    console.log(data);
+  };
 
   return (
     <>
@@ -97,10 +110,20 @@ const Auth = () => {
             </span>
           </CardBody>
           <CardFooter>
-            <Button block className="mt-4 ">
+            <Button
+              block
+              name="google"
+              className="mt-4"
+              onClick={onSocialClick}
+            >
               Continue with Google
             </Button>
-            <Button block className=" mb-4">
+            <Button
+              block
+              name="github"
+              className="mb-4"
+              onClick={onSocialClick}
+            >
               Continue with Github
             </Button>
           </CardFooter>
