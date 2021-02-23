@@ -1,8 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { dbService } from '../fbInstance';
 
 const Home = () => {
   const [msg, setMsg] = useState('');
+  const [msgs, setMsgs] = useState([]);
+
+  const getMsgs = async () => {
+    const data = await dbService.collection('aweets').get();
+    data.forEach(doc => {
+      const msgObject = {
+        ...doc.data(),
+        id: doc.id,
+      };
+      setMsgs(prev => [msgObject, ...prev]);
+    });
+  };
+
+  console.log(msgs);
+
+  useEffect(() => {
+    getMsgs();
+  }, []);
+
   const onChange = e => {
     const {
       target: { value },
@@ -30,6 +49,13 @@ const Home = () => {
         />
         <input type="submit" value="Aweet" />
       </form>
+      <div>
+        {msgs.map(msg => (
+          <div key={msg.id}>
+            <h4>{msg.msg}</h4>
+          </div>
+        ))}
+      </div>
     </>
   );
 };
