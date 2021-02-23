@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { dbService } from '../fbInstance';
 
-const Home = () => {
+const Home = ({ userObj }) => {
   const [msg, setMsg] = useState('');
   const [msgs, setMsgs] = useState([]);
 
+  /*
+  // old way
   const getMsgs = async () => {
     const data = await dbService.collection('aweets').get();
     data.forEach(doc => {
@@ -17,9 +19,15 @@ const Home = () => {
   };
 
   console.log(msgs);
-
+*/
   useEffect(() => {
-    getMsgs();
+    // getMsgs();
+    dbService.collection('aweets').onSnapshot(snapshot => {
+      const msgArray = snapshot.docs.map(doc => {
+        return { id: doc.id, ...doc.data() };
+      });
+      setMsgs(msgArray);
+    });
   }, []);
 
   const onChange = e => {
@@ -31,8 +39,9 @@ const Home = () => {
   const onSubmit = async e => {
     e.preventDefault();
     await dbService.collection('aweets').add({
-      msg,
+      text: msg,
       createdAt: Date.now(),
+      creator: userObj.uid,
     });
     setMsg('');
   };
@@ -52,7 +61,7 @@ const Home = () => {
       <div>
         {msgs.map(msg => (
           <div key={msg.id}>
-            <h4>{msg.msg}</h4>
+            <h4>{msg.text}</h4>
           </div>
         ))}
       </div>
