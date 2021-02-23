@@ -17,6 +17,7 @@ const AppRouter = ({ isLoggedIn, userObj }) => {
       return <Component {...props} {...matchProps} />;
     };
   };
+
   return (
     <Container id="main-body">
       <Router>
