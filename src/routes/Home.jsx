@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Message from '../components/Message';
 import { dbService } from '../fbInstance';
 
 const Home = ({ userObj }) => {
@@ -22,6 +23,7 @@ const Home = ({ userObj }) => {
 */
   useEffect(() => {
     // getMsgs();
+    // new way!! (database listener)
     dbService.collection('aweets').onSnapshot(snapshot => {
       const msgArray = snapshot.docs.map(doc => {
         return { id: doc.id, ...doc.data() };
@@ -36,12 +38,13 @@ const Home = ({ userObj }) => {
     } = e;
     setMsg(value);
   };
+
   const onSubmit = async e => {
     e.preventDefault();
     await dbService.collection('aweets').add({
       text: msg,
       createdAt: Date.now(),
-      creator: userObj.uid,
+      creatorId: userObj.uid,
     });
     setMsg('');
   };
@@ -60,9 +63,11 @@ const Home = ({ userObj }) => {
       </form>
       <div>
         {msgs.map(msg => (
-          <div key={msg.id}>
-            <h4>{msg.text}</h4>
-          </div>
+          <Message
+            key={msg.id}
+            msgObj={msg}
+            isOwner={msg.creatorId === userObj.uid}
+          />
         ))}
       </div>
     </>
