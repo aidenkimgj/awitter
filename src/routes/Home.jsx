@@ -5,6 +5,7 @@ import { dbService } from '../fbInstance';
 const Home = ({ userObj }) => {
   const [msg, setMsg] = useState('');
   const [msgs, setMsgs] = useState([]);
+  const [image, setImage] = useState('');
 
   /*
   // old way
@@ -39,6 +40,23 @@ const Home = ({ userObj }) => {
     setMsg(value);
   };
 
+  const onFileChange = e => {
+    const {
+      target: { files },
+    } = e;
+    const file = files[0];
+    const reader = new FileReader();
+    reader.onloadend = finishedevent => {
+      const {
+        target: { result },
+      } = finishedevent;
+      setImage(result);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const imageClear = () => setImage('');
+
   const onSubmit = async e => {
     e.preventDefault();
     await dbService.collection('aweets').add({
@@ -59,7 +77,14 @@ const Home = ({ userObj }) => {
           onChange={onChange}
           maxLength={120}
         />
+        <input type="file" accept="image/*" onChange={onFileChange} />
         <input type="submit" value="Aweet" />
+        {image && (
+          <div>
+            <img src={image} width="50px" height="50px" />
+            <button onClick={imageClear}>Clear</button>
+          </div>
+        )}
       </form>
       <div>
         {msgs.map(msg => (
