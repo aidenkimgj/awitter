@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Message from '../components/Message';
-import { dbService } from '../fbInstance';
+import { dbService, storageService } from '../fbInstance';
+import uuid from 'uuid/dist/v4';
 
 const Home = ({ userObj }) => {
   const [msg, setMsg] = useState('');
@@ -59,12 +60,16 @@ const Home = ({ userObj }) => {
 
   const onSubmit = async e => {
     e.preventDefault();
-    await dbService.collection('aweets').add({
-      text: msg,
-      createdAt: Date.now(),
-      creatorId: userObj.uid,
-    });
-    setMsg('');
+    console.log('uuid', uuid());
+    const fileRef = storageService.ref().child(`${userObj.uid}/${uuid()}`);
+    const response = await fileRef.putString(image, 'data_url');
+    console.log('response', response);
+    // await dbService.collection('aweets').add({
+    //   text: msg,
+    //   createdAt: Date.now(),
+    //   creatorId: userObj.uid,
+    // });
+    // setMsg('');
   };
 
   return (
