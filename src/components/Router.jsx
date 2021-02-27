@@ -30,7 +30,11 @@ const AppRouter = ({ isLoggedIn, userObj }) => {
                 exact
                 component={withProps(Home, { userObj: userObj })}
               />
-              <Route path="/profile" exact component={Profile} />
+              <Route
+                path="/profile"
+                exact
+                component={withProps(Profile, { userObj: userObj })}
+              />
               {/* <Redirect from="*" to="/" /> */}
             </>
           ) : (
