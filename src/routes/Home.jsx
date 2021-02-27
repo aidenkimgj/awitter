@@ -60,16 +60,20 @@ const Home = ({ userObj }) => {
 
   const onSubmit = async e => {
     e.preventDefault();
-    console.log('uuid', uuid());
-    const fileRef = storageService.ref().child(`${userObj.uid}/${uuid()}`);
-    const response = await fileRef.putString(image, 'data_url');
-    console.log('response', response);
-    // await dbService.collection('aweets').add({
-    //   text: msg,
-    //   createdAt: Date.now(),
-    //   creatorId: userObj.uid,
-    // });
-    // setMsg('');
+    let imageUrl = '';
+    if (image !== '') {
+      const imageRef = storageService.ref().child(`${userObj.uid}/${uuid()}`);
+      const response = await imageRef.putString(image, 'data_url');
+      imageUrl = await response.ref.getDownloadURL();
+    }
+    const msgObj = {
+      text: msg,
+      createdAt: Date.now(),
+      creatorId: userObj.uid,
+      imageUrl,
+    };
+    await dbService.collection('aweets').add(msgObj);
+    setMsg('');
   };
 
   return (

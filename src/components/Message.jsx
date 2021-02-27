@@ -50,6 +50,9 @@ const Message = ({ msgObj, isOwner }) => {
       ) : (
         <>
           <h4>{msgObj.text}</h4>
+          {msgObj.imageUrl && (
+            <img src={msgObj.imageUrl} width="50px" height="50px" />
+          )}
           {isOwner && (
             <div>
               <button onClick={onDeleteClick}>Delete Message</button>
