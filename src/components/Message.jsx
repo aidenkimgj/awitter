@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { dbService } from '../fbInstance';
+import { dbService, storageService } from '../fbInstance';
 
 const Message = ({ msgObj, isOwner }) => {
   const [edit, setEdit] = useState(false);
@@ -10,7 +10,10 @@ const Message = ({ msgObj, isOwner }) => {
       'Are you sure you want to delete this message?'
     );
     if (check) {
+      // delete message
       await dbService.doc(`aweets/${msgObj.id}`).delete();
+      // delete attachment
+      await storageService.refFromURL(msgObj.imageUrl).delete();
     }
   };
 

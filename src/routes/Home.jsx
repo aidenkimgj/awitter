@@ -62,8 +62,10 @@ const Home = ({ userObj }) => {
     e.preventDefault();
     let imageUrl = '';
     if (image !== '') {
+      // store attachment in the fire storage
       const imageRef = storageService.ref().child(`${userObj.uid}/${uuid()}`);
       const response = await imageRef.putString(image, 'data_url');
+      console.log(response);
       imageUrl = await response.ref.getDownloadURL();
     }
     const msgObj = {
