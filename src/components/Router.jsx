@@ -21,7 +21,7 @@ const AppRouter = ({ isLoggedIn, userObj }) => {
   return (
     <Container id="main-body">
       <Router>
-        {isLoggedIn && <Navigation />}
+        {isLoggedIn && <Navigation userObj={userObj} />}
         <Switch>
           {isLoggedIn ? (
             <>
