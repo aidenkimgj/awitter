@@ -11,7 +11,7 @@ import { Container } from 'reactstrap';
 import Navigation from './Navigation';
 import Profile from '../routes/Profile';
 
-const AppRouter = ({ isLoggedIn, userObj }) => {
+const AppRouter = ({ isLoggedIn, refreshUser, userObj }) => {
   const withProps = (Component, props) => {
     return matchProps => {
       return <Component {...props} {...matchProps} />;
@@ -21,7 +21,7 @@ const AppRouter = ({ isLoggedIn, userObj }) => {
   return (
     <Container id="main-body">
       <Router>
-        {isLoggedIn && <Navigation />}
+        {isLoggedIn && <Navigation userObj={userObj} />}
         <Switch>
           {isLoggedIn ? (
             <>
@@ -30,7 +30,14 @@ const AppRouter = ({ isLoggedIn, userObj }) => {
                 exact
                 component={withProps(Home, { userObj: userObj })}
               />
-              <Route path="/profile" exact component={Profile} />
+              <Route
+                path="/profile"
+                exact
+                component={withProps(Profile, {
+                  userObj: userObj,
+                  refreshUser: refreshUser,
+                })}
+              />
               {/* <Redirect from="*" to="/" /> */}
             </>
           ) : (
