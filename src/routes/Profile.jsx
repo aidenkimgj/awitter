@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { authService, dbService, storageService } from '../fbInstance';
 import uuid from 'uuid/dist/v4';
 
-const Profile = ({ userObj }) => {
+const Profile = ({ userObj, refreshUser }) => {
   const history = useHistory();
   const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
   const [image, setImage] = useState('');
@@ -66,6 +66,7 @@ const Profile = ({ userObj }) => {
           displayName: newDisplayName,
         });
       }
+      refreshUser();
     }
   };
 

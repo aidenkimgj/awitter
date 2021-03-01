@@ -6,25 +6,46 @@ import Footer from './Footer';
 
 export default () => {
   const [init, setInit] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userObj, setUserObj] = useState(null);
 
   useEffect(() => {
     authService.onAuthStateChanged(user => {
       if (user) {
-        setIsLoggedIn(true);
-        setUserObj(user);
-      } else {
-        setIsLoggedIn(false);
+        console.log(user);
+        // setIsLoggedIn(true);
+        setUserObj({
+          displayName: user.displayName,
+          uid: user.uid,
+          photoURL: user.photoURL,
+          updateProfile: args => user.updateProfile(args),
+        });
+        // } else {
+        //   setIsLoggedIn(false);
+        // }
       }
       setInit(true);
     });
   }, []);
 
+  const refreshUser = () => {
+    const user = authService.currentUser;
+    setUserObj({
+      displayName: user.displayName,
+      uid: user.uid,
+      photoURL: user.photoURL,
+      updateProfile: args => user.updateProfile(args),
+    });
+  };
+
   return (
     <>
       {init ? (
-        <AppRouter isLoggedIn={isLoggedIn} userObj={userObj} />
+        <AppRouter
+          isLoggedIn={Boolean(userObj)}
+          refreshUser={refreshUser}
+          userObj={userObj}
+        />
       ) : (
         'Initializing....'
       )}

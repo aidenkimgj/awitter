@@ -11,7 +11,7 @@ import { Container } from 'reactstrap';
 import Navigation from './Navigation';
 import Profile from '../routes/Profile';
 
-const AppRouter = ({ isLoggedIn, userObj }) => {
+const AppRouter = ({ isLoggedIn, refreshUser, userObj }) => {
   const withProps = (Component, props) => {
     return matchProps => {
       return <Component {...props} {...matchProps} />;
@@ -33,7 +33,10 @@ const AppRouter = ({ isLoggedIn, userObj }) => {
               <Route
                 path="/profile"
                 exact
-                component={withProps(Profile, { userObj: userObj })}
+                component={withProps(Profile, {
+                  userObj: userObj,
+                  refreshUser: refreshUser,
+                })}
               />
               {/* <Redirect from="*" to="/" /> */}
             </>
