@@ -73,10 +73,12 @@ const AuthForm = () => {
         <Button block className="mt-4 create">
           {newAccount ? 'Create Account' : 'Login'}
         </Button>
+        <div className="toggle-auth">
+          <span onClick={toggleHandler}>
+            {newAccount ? 'Sign In' : 'Create Account'}
+          </span>
+        </div>
       </Form>
-      <span onClick={toggleHandler}>
-        {newAccount ? 'Sign In' : 'Create Account'}
-      </span>
     </>
   );
 };
