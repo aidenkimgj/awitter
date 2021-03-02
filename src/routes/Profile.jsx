@@ -44,7 +44,6 @@ const Profile = ({ userObj, refreshUser }) => {
     e.preventDefault();
     let imageUrl = '';
     if (image !== '') {
-      await storageService.refFromURL(userObj.photoURL).delete();
       // store attachment in the fire storage
       const imageRef = storageService
         .ref()
@@ -54,9 +53,14 @@ const Profile = ({ userObj, refreshUser }) => {
       imageUrl = await response.ref.getDownloadURL();
     }
     console.log(userObj.photoURL, 'photoURL');
+    console.log(userObj.photoURL.search('.com'), '진위여부');
 
     if (userObj.displayName !== newDisplayName || image) {
       if (imageUrl !== '') {
+        if (userObj.photoURL.search('firebase') > 0) {
+          await storageService.refFromURL(userObj.photoURL).delete();
+        }
+
         await userObj.updateProfile({
           displayName: newDisplayName,
           photoURL: imageUrl,
