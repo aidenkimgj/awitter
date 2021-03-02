@@ -48,6 +48,7 @@ const MessageFactory = ({ userObj }) => {
     };
     await dbService.collection('aweets').add(msgObj);
     setMsg('');
+    imageClear();
   };
 
   return (

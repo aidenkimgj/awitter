@@ -10,10 +10,13 @@ const Message = ({ msgObj, isOwner }) => {
       'Are you sure you want to delete this message?'
     );
     if (check) {
+      // delete attachment
+      if (msgObj.imageUrl !== '') {
+        await storageService.refFromURL(msgObj.imageUrl).delete();
+      }
+
       // delete message
       await dbService.doc(`aweets/${msgObj.id}`).delete();
-      // delete attachment
-      await storageService.refFromURL(msgObj.imageUrl).delete();
     }
   };
 
