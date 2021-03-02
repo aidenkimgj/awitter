@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+
 import { authService, dbService, storageService } from '../fbInstance';
 import uuid from 'uuid/dist/v4';
 
 const Profile = ({ userObj, refreshUser }) => {
-  const history = useHistory();
   const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
   const [image, setImage] = useState('');
-
-  const onLogOutClick = () => {
-    authService.signOut();
-    history.push('/');
-  };
 
   const onChange = e => {
     const {
@@ -112,7 +106,6 @@ const Profile = ({ userObj, refreshUser }) => {
         <input type="file" accept="image/*" onChange={onFileChange} />
         <input type="submit" value="Update" />
       </form>
-      <button onClick={onLogOutClick}>Log Out</button>
     </>
   );
 };
