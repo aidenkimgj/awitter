@@ -1,17 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
-import {
-  Collapse,
-  Container,
-  Navbar,
-  NavbarToggler,
-  Nav,
-  NavItem,
-  Button,
-  Form,
-  CardImg,
-} from 'reactstrap';
+import { Collapse, Container, Navbar, NavbarToggler, Nav } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAt } from '@fortawesome/free-solid-svg-icons';
 import { authService } from '../fbInstance';

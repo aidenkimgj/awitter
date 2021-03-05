@@ -1,0 +1,51 @@
+.profile-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 90vh;
+
+  .profile {
+    padding-bottom: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    input {
+      text-align: center;
+      border-radius: 10px;
+      border: none;
+    }
+    .image {
+      margin-bottom: 20px;
+
+      #image {
+        text-align: center;
+        .new-image {
+          display: block;
+        }
+        span {
+          margin-top: 10px;
+          color: #a6a6a6;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .image-add-label {
+      margin-top: 15px;
+      color: #a6a6a6;
+      cursor: pointer;
+    }
+
+    .file-input {
+      opacity: 0;
+    }
+
+    .update-button {
+      color: #f0f0f0;
+      font-weight: bold;
+      background-color: #0db1f7;
+    }
+  }
+}
