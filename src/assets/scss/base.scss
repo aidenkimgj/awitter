@@ -3,6 +3,10 @@
 @import './footer';
 @import './navigation';
 
-#main-body {
-  min-height: 93vh;
+#container {
+  background-color: #edeff0;
+
+  #main-body {
+    min-height: 93vh;
+  }
 }

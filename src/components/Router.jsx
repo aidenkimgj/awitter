@@ -21,33 +21,35 @@ const AppRouter = ({ isLoggedIn, refreshUser, userObj }) => {
   return (
     <Router>
       {isLoggedIn && <Navigation userObj={userObj} />}
-      <Container id="main-body">
-        <Switch>
-          {isLoggedIn ? (
-            <>
-              <Route
-                path="/"
-                exact
-                component={withProps(Home, { userObj: userObj })}
-              />
-              <Route
-                path="/profile"
-                exact
-                component={withProps(Profile, {
-                  userObj: userObj,
-                  refreshUser: refreshUser,
-                })}
-              />
-              {/* <Redirect from="*" to="/" /> */}
-            </>
-          ) : (
-            <>
-              <Route path="/" exact component={Auth} />
-              <Redirect from="*" to="/" />
-            </>
-          )}
-        </Switch>
-      </Container>
+      <div id="container">
+        <Container id="main-body">
+          <Switch>
+            {isLoggedIn ? (
+              <>
+                <Route
+                  path="/"
+                  exact
+                  component={withProps(Home, { userObj: userObj })}
+                />
+                <Route
+                  path="/profile"
+                  exact
+                  component={withProps(Profile, {
+                    userObj: userObj,
+                    refreshUser: refreshUser,
+                  })}
+                />
+                {/* <Redirect from="*" to="/" /> */}
+              </>
+            ) : (
+              <>
+                <Route path="/" exact component={Auth} />
+                <Redirect from="*" to="/" />
+              </>
+            )}
+          </Switch>
+        </Container>
+      </div>
     </Router>
   );
 };

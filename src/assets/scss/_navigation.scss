@@ -3,13 +3,12 @@
     font-size: 30px;
     font-weight: bolder;
   }
-  span {
-    align-items: center;
-  }
-
-  .logout {
-    margin-left: 20px;
-    padding-top: 4px;
-    cursor: pointer;
+  .nav-item {
+    text-align: center;
+    .logout {
+      margin-left: 20px;
+      padding-top: 4px;
+      cursor: pointer;
+    }
   }
 }
