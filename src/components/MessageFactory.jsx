@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { dbService, storageService } from '../fbInstance';
 import uuid from 'uuid/dist/v4';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const MessageFactory = ({ userObj }) => {
   const [msg, setMsg] = useState('');
@@ -72,6 +72,7 @@ const MessageFactory = ({ userObj }) => {
           />
           <input type="submit" value="post" className="message-post" />
         </div>
+
         <label for="attach-image" className="image-add-label">
           <span>Add photo</span>
 
@@ -85,9 +86,12 @@ const MessageFactory = ({ userObj }) => {
         />
 
         {image && (
-          <div>
-            <img src={image} width="50px" height="50px" />
-            <button onClick={imageClear}>Clear</button>
+          <div className="image-display">
+            <img src={image} width="80px" height="80px" />
+            <span onClick={imageClear}>
+              Remove &nbsp;
+              <FontAwesomeIcon icon={faTimes} className="clear-icon" />
+            </span>
           </div>
         )}
       </form>

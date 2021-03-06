@@ -49,4 +49,21 @@
   #attach-image {
     opacity: 0;
   }
+
+  .image-display {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 20px;
+
+    img {
+      border-radius: 20px;
+      margin-bottom: 5px;
+    }
+
+    span {
+      color: $attach-color;
+      cursor: pointer;
+    }
+  }
 }
