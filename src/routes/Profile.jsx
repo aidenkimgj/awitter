@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import { storageService } from '../fbInstance';
 import uuid from 'uuid/dist/v4';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -124,7 +123,7 @@ const Profile = ({ userObj, refreshUser }) => {
             onChange={onChange}
           />
           <label for="image-add" className="image-add-label">
-            <span>Add photo</span>
+            <span>Change photo</span>
             <FontAwesomeIcon icon={faPlus} style={{ marginLeft: '10px' }} />
           </label>
           <input

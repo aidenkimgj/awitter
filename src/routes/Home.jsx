@@ -25,12 +25,15 @@ const Home = ({ userObj }) => {
   useEffect(() => {
     // getMsgs();
     // new way!! (database listener)
-    dbService.collection('aweets').onSnapshot(snapshot => {
-      const msgArray = snapshot.docs.map(doc => {
-        return { id: doc.id, ...doc.data() };
+    dbService
+      .collection('aweets')
+      .orderBy('createdAt', 'desc')
+      .onSnapshot(snapshot => {
+        const msgArray = snapshot.docs.map(doc => {
+          return { id: doc.id, ...doc.data() };
+        });
+        setMsgs(msgArray);
       });
-      setMsgs(msgArray);
-    });
   }, []);
 
   return (

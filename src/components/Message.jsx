@@ -55,7 +55,7 @@ const Message = ({ msgObj, isOwner }) => {
         </>
       ) : (
         <>
-          <h4>{msgObj.text}</h4>
+          <h3>{msgObj.text}</h3>
           {msgObj.imageUrl && (
             <img src={msgObj.imageUrl} width="50px" height="50px" />
           )}

@@ -15,6 +15,11 @@
       text-align: center;
       border-radius: 10px;
       border: none;
+      font-weight: bold;
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 3pt 1pt red;
+      }
     }
     .image {
       margin-bottom: 20px;
@@ -34,7 +39,7 @@
 
     .image-add-label {
       margin-top: 15px;
-      color: #a6a6a6;
+      color: $attach-color;
       cursor: pointer;
     }
 
@@ -45,7 +50,9 @@
     .update-button {
       color: #f0f0f0;
       font-weight: bold;
-      background-color: #0db1f7;
+      background-color: $btn-color;
+      text-align: center;
+      padding-bottom: 3px;
     }
   }
 }

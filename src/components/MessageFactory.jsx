@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { dbService, storageService } from '../fbInstance';
 import uuid from 'uuid/dist/v4';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const MessageFactory = ({ userObj }) => {
   const [msg, setMsg] = useState('');
@@ -40,29 +42,48 @@ const MessageFactory = ({ userObj }) => {
       console.log(response);
       imageUrl = await response.ref.getDownloadURL();
     }
-    const msgObj = {
-      text: msg,
-      createdAt: Date.now(),
-      creatorId: userObj.uid,
-      imageUrl,
-    };
-    await dbService.collection('aweets').add(msgObj);
-    setMsg('');
-    imageClear();
+
+    if (msg === '') {
+      return alert('Please write anything!');
+    } else {
+      const msgObj = {
+        text: msg,
+        createdAt: Date.now(),
+        creatorId: userObj.uid,
+        imageUrl,
+      };
+      await dbService.collection('aweets').add(msgObj);
+      setMsg('');
+      imageClear();
+    }
   };
 
   return (
     <>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className="create-message">
+        <div className="message-input-container">
+          <input
+            className="message-input"
+            type="text"
+            value={msg}
+            placeholder="What's on your mind?"
+            onChange={onChange}
+            maxLength={120}
+          />
+          <input type="submit" value="post" className="message-post" />
+        </div>
+        <label for="attach-image" className="image-add-label">
+          <span>Add photo</span>
+
+          <FontAwesomeIcon icon={faPlus} style={{ marginLeft: '10px' }} />
+        </label>
         <input
-          type="text"
-          value={msg}
-          placeholder="What's on your mind?"
-          onChange={onChange}
-          maxLength={120}
+          id="attach-image"
+          type="file"
+          accept="image/*"
+          onChange={onFileChange}
         />
-        <input type="file" accept="image/*" onChange={onFileChange} />
-        <input type="submit" value="Aweet" />
+
         {image && (
           <div>
             <img src={image} width="50px" height="50px" />
