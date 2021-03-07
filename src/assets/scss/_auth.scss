@@ -1,3 +1,37 @@
-.login {
-  // margin-top: 15%;
+.login-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .main-icon {
+    text-align: center;
+    margin-bottom: 20px;
+
+    span {
+      font-size: larger;
+      font-weight: bold;
+      color: #04aaff;
+    }
+  }
+
+  .create {
+    background-color: #04aaff;
+    border-style: none;
+    &:hover {
+      background-color: #0896dd;
+      border-style: none;
+    }
+  }
+
+  .toggle-auth {
+    margin: 10px;
+    display: block;
+    text-align: center;
+
+    span {
+      color: #04aaff;
+      cursor: pointer;
+    }
+  }
 }

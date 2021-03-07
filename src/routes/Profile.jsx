@@ -1,17 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { authService, dbService, storageService } from '../fbInstance';
+import React, { useState } from 'react';
+import { storageService } from '../fbInstance';
 import uuid from 'uuid/dist/v4';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const Profile = ({ userObj, refreshUser }) => {
-  const history = useHistory();
   const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
   const [image, setImage] = useState('');
-
-  const onLogOutClick = () => {
-    authService.signOut();
-    history.push('/');
-  };
 
   const onChange = e => {
     const {
@@ -44,7 +39,6 @@ const Profile = ({ userObj, refreshUser }) => {
     e.preventDefault();
     let imageUrl = '';
     if (image !== '') {
-      await storageService.refFromURL(userObj.photoURL).delete();
       // store attachment in the fire storage
       const imageRef = storageService
         .ref()
@@ -54,9 +48,14 @@ const Profile = ({ userObj, refreshUser }) => {
       imageUrl = await response.ref.getDownloadURL();
     }
     console.log(userObj.photoURL, 'photoURL');
+    console.log(userObj.photoURL.search('.com'), '진위여부');
 
     if (userObj.displayName !== newDisplayName || image) {
       if (imageUrl !== '') {
+        if (userObj.photoURL.search('firebase') > 0) {
+          await storageService.refFromURL(userObj.photoURL).delete();
+        }
+
         await userObj.updateProfile({
           displayName: newDisplayName,
           photoURL: imageUrl,
@@ -88,27 +87,55 @@ const Profile = ({ userObj, refreshUser }) => {
 
   return (
     <>
-      <form onSubmit={onSubmit}>
-        {image ? (
-          <div>
-            <img src={image} width="50px" height="50px" />
-            <button onClick={imageClear}>Clear</button>
+      <div className="profile-container">
+        <form onSubmit={onSubmit} className="profile">
+          <div className="image">
+            {image ? (
+              <div id="image">
+                <img
+                  src={image}
+                  width="100px"
+                  height="100px"
+                  style={{ borderRadius: '50%' }}
+                  className="new-image"
+                />
+                <span onClick={imageClear}>
+                  Remove &nbsp;
+                  <FontAwesomeIcon icon={faTimes} className="clear-icon" />
+                </span>
+              </div>
+            ) : (
+              <div>
+                <img
+                  src={userObj.photoURL}
+                  width="100px"
+                  height="100px"
+                  style={{ borderRadius: '50%' }}
+                />
+              </div>
+            )}
           </div>
-        ) : (
-          <div>
-            <img src={userObj.photoURL} width="50px" height="50px" />
-          </div>
-        )}
-        <input
-          type="text"
-          placeholder="Display Name"
-          value={newDisplayName}
-          onChange={onChange}
-        />
-        <input type="file" accept="image/*" onChange={onFileChange} />
-        <input type="submit" value="Update" />
-      </form>
-      <button onClick={onLogOutClick}>Log Out</button>
+
+          <input
+            type="text"
+            placeholder="Display Name"
+            value={newDisplayName}
+            onChange={onChange}
+          />
+          <label for="image-add" className="image-add-label">
+            <span>Change photo</span>
+            <FontAwesomeIcon icon={faPlus} style={{ marginLeft: '10px' }} />
+          </label>
+          <input
+            id="image-add"
+            type="file"
+            accept="image/*"
+            onChange={onFileChange}
+            className="file-input"
+          />
+          <input type="submit" value="Update" className="update-button" />
+        </form>
+      </div>
     </>
   );
 };

@@ -1,7 +1,21 @@
 @import './variables';
 @import './auth';
 @import './footer';
+@import './navigation';
+@import './profile';
+@import './createMessage';
+@import './messages';
 
-#main-body {
-  min-height: 93vh;
+#container {
+  background-color: #edeff0;
+  min-width: 400px;
+  #main-body {
+    min-height: 93vh;
+  }
+}
+
+input {
+  &::placeholder {
+    opacity: 0.2;
+  }
 }

@@ -20,10 +20,11 @@ export default () => {
           photoURL: user.photoURL,
           updateProfile: args => user.updateProfile(args),
         });
-        // } else {
-        //   setIsLoggedIn(false);
-        // }
+      } else {
+        setUserObj(null);
+        // setIsLoggedIn(false);
       }
+
       setInit(true);
     });
   }, []);

@@ -1,0 +1,14 @@
+.sticky-top {
+  .head {
+    font-size: 30px;
+    font-weight: bolder;
+  }
+  .nav-item {
+    text-align: center;
+    .logout {
+      margin-left: 20px;
+      padding-top: 4px;
+      cursor: pointer;
+    }
+  }
+}
