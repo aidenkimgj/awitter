@@ -6,11 +6,11 @@ The project uses Firebase to implement lightweight SNS. Users can create account
 
 ## Use tech
 
-JavaScript
-React JS
-Bootstrap
-React Bootstrap
-Firebase
-SCSS
-Git
-GitHub
+- JavaScript
+- React JS
+- Bootstrap
+- React Bootstrap
+- Firebase
+- SCSS
+- Git
+- GitHub
