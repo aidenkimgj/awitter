@@ -3,20 +3,21 @@ import { dbService, storageService } from '../fbInstance';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faEdit } from '@fortawesome/free-regular-svg-icons';
 
+import EditMessage from './EditMessage';
+
 const Message = ({ msgObj, isOwner }) => {
   const [edit, setEdit] = useState(false);
-  const [newMsg, setNewMsg] = useState(msgObj.text);
 
   const onDeleteClick = async () => {
     const check = window.confirm(
       'Are you sure you want to delete this message?'
     );
+
     if (check) {
       // delete attachment
       if (msgObj.imageUrl !== '') {
         await storageService.refFromURL(msgObj.imageUrl).delete();
       }
-
       // delete message
       await dbService.doc(`aweets/${msgObj.id}`).delete();
     }
@@ -24,41 +25,11 @@ const Message = ({ msgObj, isOwner }) => {
 
   const toggleHandler = () => setEdit(!edit);
 
-  const onChange = e => {
-    const {
-      target: { value },
-    } = e;
-    setNewMsg(value);
-  };
-
-  const onSubmit = async e => {
-    e.preventDefault();
-    await dbService.doc(`aweets/${msgObj.id}`).update({
-      text: newMsg,
-    });
-    setEdit(false);
-  };
-
   return (
     <>
       <div className="messages-body">
         {edit ? (
-          <>
-            <div className="message-update">
-              <form onSubmit={onSubmit} className="update-form">
-                <input
-                  type="text"
-                  placeholder="Edit your message"
-                  value={newMsg}
-                  onChange={onChange}
-                  required
-                  className="update-input"
-                />
-                <input type="submit" value="Update" className="update-button" />
-              </form>
-              <button onClick={toggleHandler}>Cancel</button>
-            </div>
-          </>
+          <EditMessage msgObj={msgObj} toggleHandler={toggleHandler} />
         ) : (
           <>
             <div className="message-item">
