@@ -1,0 +1,84 @@
+.messages-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 50px;
+
+  .messages-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 350px;
+
+    .message-update {
+      .update-form {
+        .update-input {
+          display: block;
+          padding: 15px;
+          border-radius: 10px;
+          border: none;
+          width: 350px;
+
+          &:focus {
+            outline: none;
+          }
+        }
+        .update-button {
+          margin-top: 5px;
+          margin-left: 210px;
+          margin-bottom: 20px;
+          position: absolute;
+          border-radius: 10px;
+          border: none;
+          color: white;
+          background-color: $btn-color;
+          font-weight: bold;
+        }
+      }
+
+      button {
+        margin-top: 5px;
+        margin-left: 285px;
+        margin-bottom: 20px;
+        position: relative;
+        border-radius: 10px;
+        border: none;
+        color: white;
+        background-color: tomato;
+        font-weight: bold;
+      }
+    }
+
+    .message-item {
+      margin-bottom: 20px;
+
+      h3 {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        width: 350px;
+        font-size: 15px;
+        position: relative;
+      }
+
+      img {
+        right: -10px;
+        top: 20px;
+        position: absolute;
+        border-radius: 20px;
+        width: 50px;
+        height: 50px;
+        margin-top: 10px;
+      }
+
+      .message-option {
+        position: absolute;
+        right: 10px;
+        top: 1px;
+        cursor: pointer;
+      }
+    }
+  }
+}

@@ -39,7 +39,7 @@ const Home = ({ userObj }) => {
   return (
     <>
       <MessageFactory userObj={userObj} />
-      <div>
+      <div className="messages-container">
         {msgs.map(msg => (
           <Message
             key={msg.id}

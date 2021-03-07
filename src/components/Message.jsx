@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { dbService, storageService } from '../fbInstance';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt, faEdit } from '@fortawesome/free-regular-svg-icons';
 
 const Message = ({ msgObj, isOwner }) => {
   const [edit, setEdit] = useState(false);
@@ -39,34 +41,50 @@ const Message = ({ msgObj, isOwner }) => {
 
   return (
     <>
-      {edit ? (
-        <>
-          <form onSubmit={onSubmit}>
-            <input
-              type="text"
-              placeholder="Edit your message"
-              value={newMsg}
-              onChange={onChange}
-              required
-            />
-            <input type="submit" value="Update Message" />
-          </form>
-          <button onClick={toggleHandler}>Cancel</button>
-        </>
-      ) : (
-        <>
-          <h3>{msgObj.text}</h3>
-          {msgObj.imageUrl && (
-            <img src={msgObj.imageUrl} width="50px" height="50px" />
-          )}
-          {isOwner && (
-            <div>
-              <button onClick={onDeleteClick}>Delete Message</button>
-              <button onClick={toggleHandler}>Edit Message</button>
+      <div className="messages-body">
+        {edit ? (
+          <>
+            <div className="message-update">
+              <form onSubmit={onSubmit} className="update-form">
+                <input
+                  type="text"
+                  placeholder="Edit your message"
+                  value={newMsg}
+                  onChange={onChange}
+                  required
+                  className="update-input"
+                />
+                <input type="submit" value="Update" className="update-button" />
+              </form>
+              <button onClick={toggleHandler}>Cancel</button>
             </div>
-          )}
-        </>
-      )}
+          </>
+        ) : (
+          <>
+            <div className="message-item">
+              <h3>{msgObj.text}</h3>
+              {msgObj.imageUrl && (
+                <img src={msgObj.imageUrl} width="50px" height="50px" />
+              )}
+              {isOwner && (
+                <div className="message-option">
+                  <FontAwesomeIcon
+                    icon={faTrashAlt}
+                    onClick={onDeleteClick}
+                    style={{ marginRight: '5px' }}
+                    size="xs"
+                  />
+                  <FontAwesomeIcon
+                    icon={faEdit}
+                    onClick={toggleHandler}
+                    size="xs"
+                  />
+                </div>
+              )}
+            </div>
+          </>
+        )}
+      </div>
     </>
   );
 };
