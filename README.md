@@ -1,6 +1,6 @@
 # Semi SNS project
 
-(https://aidenkimgj.github.io/awitter)
+Take a look live version [here](https://aidenkimgj.github.io/awitter)
 
 ## Description
 
