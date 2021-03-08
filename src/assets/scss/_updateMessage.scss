@@ -1,0 +1,83 @@
+.message-update {
+  .update-form {
+    .update-input {
+      display: block;
+      padding: 15px;
+      border-radius: 10px;
+      border: none;
+      width: 350px;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .image-exists {
+      img {
+        right: -10px;
+        top: 20px;
+        position: absolute;
+        border-radius: 20px;
+        width: 50px;
+        height: 50px;
+        margin-top: 10px;
+      }
+      span {
+        font-size: 12px;
+        right: -5px;
+        top: 9px;
+        position: absolute;
+        border-radius: 20px;
+        cursor: pointer;
+      }
+    }
+    .edit-image {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .image-update-label {
+        margin-top: 20px;
+        color: $attach-color;
+        cursor: pointer;
+      }
+
+      #image-update {
+        opacity: 0;
+      }
+    }
+
+    .update-button {
+      margin-left: 210px;
+      margin-top: 5px;
+      margin-bottom: 20px;
+      position: absolute;
+      border-radius: 10px;
+      border: none;
+      color: white;
+      background-color: $btn-color;
+      font-weight: bold;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  button {
+    margin-top: 5px;
+    margin-left: 285px;
+    margin-bottom: 20px;
+    position: relative;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    background-color: tomato;
+    font-weight: bold;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

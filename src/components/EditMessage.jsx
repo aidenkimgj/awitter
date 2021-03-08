@@ -3,6 +3,7 @@ import uuid from 'uuid/dist/v4';
 import { dbService, storageService } from '../fbInstance';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 
 const EditMessage = ({ msgObj, toggleHandler }) => {
   const [newMsg, setNewMsg] = useState(msgObj.text);
@@ -97,46 +98,60 @@ const EditMessage = ({ msgObj, toggleHandler }) => {
           />
           {newImage ? (
             <>
-              <img
-                src={newImage}
-                width="50px"
-                height="50px"
-                style={{ borderRadius: '20px' }}
-                className="new-image"
-              />
-              <span onClick={imageClear}>
-                Remove &nbsp;
-                <FontAwesomeIcon icon={faTimes} className="clear-icon" />
-              </span>
+              <div className="image-exists">
+                <img
+                  src={newImage}
+                  width="50px"
+                  height="50px"
+                  style={{ borderRadius: '20px' }}
+                  className="new-image"
+                />
+                <span onClick={imageClear}>
+                  Undo &nbsp;
+                  <FontAwesomeIcon
+                    icon={faTimes}
+                    size="xs"
+                    className="clear-icon"
+                  />
+                </span>
+              </div>
             </>
           ) : (
             msgObj.imageUrl && (
               <>
-                <img
-                  src={msgObj.imageUrl}
-                  width="50px"
-                  height="50px"
-                  style={{ borderRadius: '20px' }}
-                />
-                <span onClick={deleteExistImage}>
-                  Delete &nbsp;
-                  <FontAwesomeIcon icon={faTimes} className="clear-icon" />
-                </span>
+                <div className="image-exists">
+                  <img
+                    src={msgObj.imageUrl}
+                    width="50px"
+                    height="50px"
+                    style={{ borderRadius: '20px' }}
+                  />
+                  <span onClick={deleteExistImage}>
+                    Delete &nbsp;
+                    <FontAwesomeIcon
+                      icon={faTrashAlt}
+                      size="xs"
+                      className="clear-icon"
+                    />
+                  </span>
+                </div>
               </>
             )
           )}
+          <div className="edit-image">
+            <label for="image-update" className="image-update-label">
+              <span>Edit photo</span>
+              <FontAwesomeIcon icon={faPlus} style={{ marginLeft: '10px' }} />
+            </label>
+            <input
+              id="image-update"
+              type="file"
+              accept="image/*"
+              onChange={onFileChange}
+              className="file-input"
+            />
+          </div>
 
-          <label for="image-add" className="image-add-label">
-            <span>Update photo</span>
-            <FontAwesomeIcon icon={faPlus} style={{ marginLeft: '10px' }} />
-          </label>
-          <input
-            id="image-add"
-            type="file"
-            accept="image/*"
-            onChange={onFileChange}
-            className="file-input"
-          />
           <input type="submit" value="Update" className="update-button" />
         </form>
         <button onClick={toggleHandler}>Cancel</button>

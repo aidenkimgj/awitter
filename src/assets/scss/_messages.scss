@@ -12,45 +12,6 @@
     position: relative;
     width: 350px;
 
-    .message-update {
-      .update-form {
-        .update-input {
-          display: block;
-          padding: 15px;
-          border-radius: 10px;
-          border: none;
-          width: 350px;
-
-          &:focus {
-            outline: none;
-          }
-        }
-        .update-button {
-          margin-top: 5px;
-          margin-left: 210px;
-          margin-bottom: 20px;
-          position: absolute;
-          border-radius: 10px;
-          border: none;
-          color: white;
-          background-color: $btn-color;
-          font-weight: bold;
-        }
-      }
-
-      button {
-        margin-top: 5px;
-        margin-left: 285px;
-        margin-bottom: 20px;
-        position: relative;
-        border-radius: 10px;
-        border: none;
-        color: white;
-        background-color: tomato;
-        font-weight: bold;
-      }
-    }
-
     .message-item {
       margin-bottom: 20px;
 
