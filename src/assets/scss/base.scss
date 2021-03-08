@@ -5,12 +5,13 @@
 @import './profile';
 @import './createMessage';
 @import './messages';
+@import './updateMessage';
 
 #container {
   background-color: #edeff0;
 
   #main-body {
-    min-height: 93vh;
+    height: 100vh;
   }
 }
 
