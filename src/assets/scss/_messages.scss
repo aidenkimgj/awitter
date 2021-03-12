@@ -16,8 +16,9 @@
       margin-bottom: 20px;
 
       h3 {
+        word-break: break-all;
         background-color: white;
-        padding: 20px;
+        padding: 30px 45px 20px 45px;
         border-radius: 10px;
         width: 350px;
         font-size: 15px;
@@ -25,8 +26,8 @@
       }
 
       img {
-        right: -10px;
-        top: 20px;
+        left: -10px;
+        top: -20px;
         position: absolute;
         border-radius: 20px;
         width: 50px;

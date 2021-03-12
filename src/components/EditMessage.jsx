@@ -140,7 +140,11 @@ const EditMessage = ({ msgObj, toggleHandler }) => {
           )}
           <div className="edit-image">
             <label for="image-update" className="image-update-label">
-              <span>Edit photo</span>
+              {msgObj.imageUrl ? (
+                <span>Edit photo</span>
+              ) : (
+                <span>Add photo</span>
+              )}
               <FontAwesomeIcon icon={faPlus} style={{ marginLeft: '10px' }} />
             </label>
             <input
