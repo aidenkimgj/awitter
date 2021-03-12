@@ -48,14 +48,17 @@ const Profile = ({ userObj, refreshUser }) => {
       imageUrl = await response.ref.getDownloadURL();
     }
     console.log(userObj.photoURL, 'photoURL');
-    console.log(userObj.photoURL.search('.com'), '진위여부');
+    // console.log(userObj.photoURL.search('.com'), '진위여부');
 
     if (userObj.displayName !== newDisplayName || image) {
       if (imageUrl !== '') {
-        if (userObj.photoURL.search('firebase') > 0) {
+        if (
+          userObj.photoURL !== null &&
+          userObj.photoURL.search('firebase') > 0
+        ) {
           await storageService.refFromURL(userObj.photoURL).delete();
         }
-
+        console.log('이미지', imageUrl);
         await userObj.updateProfile({
           displayName: newDisplayName,
           photoURL: imageUrl,
