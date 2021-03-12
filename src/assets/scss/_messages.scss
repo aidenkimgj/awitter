@@ -25,10 +25,20 @@
         position: relative;
       }
 
-      img {
+      .owner-img {
         left: -10px;
         top: -20px;
         position: absolute;
+        border-radius: 20px;
+        width: 50px;
+        height: 50px;
+        margin-top: 10px;
+      }
+
+      .others-img {
+        position: absolute;
+        right: -20px;
+        top: -20px;
         border-radius: 20px;
         width: 50px;
         height: 50px;

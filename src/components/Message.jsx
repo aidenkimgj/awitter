@@ -34,9 +34,30 @@ const Message = ({ msgObj, isOwner }) => {
           <>
             <div className="message-item">
               <h3>{msgObj.text}</h3>
-              {msgObj.imageUrl && (
-                <img src={msgObj.imageUrl} width="50px" height="50px" />
+              {isOwner ? (
+                <>
+                  {msgObj.imageUrl && (
+                    <img
+                      src={msgObj.imageUrl}
+                      width="50px"
+                      height="50px"
+                      className="owner-img"
+                    />
+                  )}
+                </>
+              ) : (
+                <>
+                  {msgObj.imageUrl && (
+                    <img
+                      src={msgObj.imageUrl}
+                      width="50px"
+                      height="50px"
+                      className="others-img"
+                    />
+                  )}
+                </>
               )}
+
               {isOwner && (
                 <div className="message-option">
                   <FontAwesomeIcon
